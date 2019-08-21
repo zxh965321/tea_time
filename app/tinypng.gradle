@@ -1,0 +1,20 @@
+apply plugin: 'com.waynell.tinypng'
+
+//命令：./gradlew tinyPng
+tinyInfo {
+    resourceDir = [
+            // your res dir
+            "app/src/main/res",
+            "lib/src/main/res"
+    ]
+    resourcePattern = [
+            // your res pattern
+            "drawable[a-z-]*",
+            "mipmap[a-z-]*"
+    ]
+    whiteList = [
+            // your white list, support Regular Expressions
+    ]
+    apiKey = 'wzSHhRm9H5h3wfyNV7fKYQfnqZYFTFLx'
+
+}

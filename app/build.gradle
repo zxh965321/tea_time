@@ -1,0 +1,205 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'android-aspectjx'
+apply from: "jiagu.gradle"
+apply from: "andresguard.gradle"
+apply from: "tinypng.gradle"
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    useLibrary 'org.apache.http.legacy'
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.zky.tea_time"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+
+        //设置可以分包
+        multiDexEnabled true
+
+        resConfigs "zh","en"
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi'//, 'armeabi-v7a'//, 'arm64-v8a'
+        }
+
+        manifestPlaceholders = [
+                LOCATION_KEY : "731edfbabfedda1d1f3c8c9e0f7bc8e4",
+                JPUSH_APPKEY : "3155ff5ced4387180ca62819", //JPush 上注册的包名对应的 Appkey
+                JPUSH_CHANNEL: "umeng", //暂时填写默认值即可.
+                UMENG_APPKEY : "5d54f33f0cafb212c6000db0",
+                UMENG_CHANNEL: "umeng"
+        ]
+
+    }
+
+    signingConfigs {
+        /**
+         * 设置你的keystore相关
+         * demo中只是一个示例，使用时请根据实际情况进行配置
+         */
+        release {
+//            storeFile file('key/hexin.jks')
+//            storePassword 'hexin1106'
+//            keyAlias = 'hexin'
+//            keyPassword 'hexin1106'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+//            signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+//            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        disable "ResourceType"
+        abortOnError false
+    }
+
+    sourceSets.main {
+        jniLibs.srcDirs = ['libs']
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:28.0.0'
+        force 'com.android.support:design:28.0.0'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'me.jessyan:arms:2.5.2'
+    implementation 'me.jessyan:arms-imageloader-glide:2.5.2'
+
+    //view
+    implementation rootProject.ext.dependencies["autosize"]
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
+        exclude module: 'support-annotations'
+    }
+    //viewpager indicator
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+    //bgbanner
+    implementation 'cn.bingoogolapple:bga-banner:2.2.6'
+    //tools
+    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+
+    //注意 Arms 核心库现在并不会依赖某个 EventBus, 要想使用 EventBus, 还请在项目中自行依赖对应的 EventBus
+    //现在支持两种 EventBus, greenrobot 的 EventBus 和畅销书 《Android源码设计模式解析与实战》的作者 何红辉 所作的 AndroidEventBus
+    //依赖后 Arms 会自动检测您依赖的 EventBus 并自动注册
+    //建议使用 AndroidEventBus, 特别是组件化项目, 原因请看 https://github.com/hehonghui/AndroidEventBus/issues/49
+    //这种做法可以让使用者有自行选择三方库的权利, 并且还可以减轻 Arms 的体积
+//    implementation rootProject.ext.dependencies["androideventbus"]
+    implementation rootProject.ext.dependencies["eventbus"]
+    //动态权限
+    implementation rootProject.ext.dependencies["rxpermissions2"]
+
+    //test
+    debugImplementation rootProject.ext.dependencies["canary-debug"]
+    releaseImplementation rootProject.ext.dependencies["canary-release"]
+    testImplementation rootProject.ext.dependencies["canary-release"]
+    testImplementation rootProject.ext.dependencies["junit"]
+    implementation rootProject.ext.dependencies["multidex"]
+    implementation rootProject.ext.dependencies["design"]
+
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    //BaseRecyclerViewAdapterHelper
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    //更新进度条
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+    //下载器
+    implementation 'com.liulishuo.filedownloader:library:1.7.2'
+    //状态栏适配
+    implementation 'com.gyf.immersionbar:immersionbar:2.3.3-beta09'
+    implementation 'com.hjq:toast:5.0'
+    //三级联动
+    implementation 'com.contrarywind:Android-PickerView:4.1.5'
+
+    //定位功能
+    implementation 'com.amap.api:location:4.2.0'
+//    //极光推送
+//    implementation 'cn.jiguang.sdk:jpush:3.1.7'
+//    implementation 'cn.jiguang.sdk:jcore:1.2.5'
+
+    //bugly
+    implementation 'com.tencent.bugly:crashreport:3.0.0'
+//    implementation 'com.tencent.bugly:nativecrashreport:3.6.0'
+
+    //免混淆
+    implementation "com.blankj:free-proguard:0.0.10"
+
+    //网络日志打印
+    implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
+
+    // https://github.com/jgilfelt/chuck
+    debugImplementation("com.readystatesoftware.chuck:library:1.1.0") {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+//    debugImplementation "com.readystatesoftware.chuck:library-no-op:1.1.0"
+    releaseImplementation "com.readystatesoftware.chuck:library-no-op:1.1.0"
+    //1.1.0 （1.0.5及以前版本的老用户升级需谨慎，API改动过大）
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-31'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-31'//没有使用特殊Header，可以不加这行
+
+    // blockcanary
+    debugImplementation 'com.github.markzhai:blockcanary-android:1.5.0'
+    releaseImplementation 'com.github.markzhai:blockcanary-no-op:1.5.0'
+    //mock工具
+    debugImplementation 'com.github.yinlingchaoliu:retrofit-mock:1.0.1'
+    releaseImplementation 'com.github.yinlingchaoliu:retrofit-mock-no-op:1.0.1'
+    implementation 'com.bigkoo:alertview:1.0.3'
+//    implementation project(':jsbridge')
+    //第三方库挂载引用 api
+//    implementation project(":umeng")
+//    implementation project(':jpush')
+}
+
+//bugly {
+//    debug = false
+//    appId = 'e46661c4e1' // 注册时分配的App ID
+//    appKey = 'af4c02fb-6850-41d5-a6e8-9858e55176fd' // 注册时分配的App Key
+//}
+
+aspectjx {
+    enabled true
+}

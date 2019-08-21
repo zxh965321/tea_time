@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Tea_Time</string>
+    <string name="skip">跳过</string>
+    <string name="imputpassword">请输入6到16位字母数字密码</string>
+</resources>
