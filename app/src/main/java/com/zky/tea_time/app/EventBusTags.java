@@ -8,9 +8,6 @@ package com.zky.tea_time.app;
  *
  * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki#3.5">EventBusTags wiki 官方文档</a>
  * Created by MVPArmsTemplate on 01/09/2019 14:35
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
- * ================================================
  */
 public interface EventBusTags {
 

@@ -34,6 +34,11 @@ import java.util.regex.Pattern;
 
 import me.jessyan.autosize.utils.LogUtils;
 
+/**
+
+ *  @author zky
+ *  @description: AppUtils 获取系统信息
+ */
 public class AppUtils {
     private static long lastClickTime;
     private static final long FAST_CLICK_TIME = 600;
@@ -163,7 +168,7 @@ public class AppUtils {
                 textView.setText(millisUntilFinished / 1000 + "秒");
                 Resources resources = textView.getContext().getResources();
                 textView.setTextColor(resources.getColor(R.color.colorPrimary));
-                textView.setBackgroundColor(resources.getColor(R.color.white));
+                textView.setBackgroundColor(resources.getColor(R.color.colorWhite));
             }
 
             @Override
@@ -173,7 +178,7 @@ public class AppUtils {
                 textView.setText(resources.getString(R.string.skip));
                 textView.setTextColor(resources.getColor(R.color.colorPrimary));
 //                textView.setBackgroundColor(resources.getColor(R.color.appmainbg));
-                textView.setBackgroundColor(resources.getColor(R.color.white));
+                textView.setBackgroundColor(resources.getColor(R.color.colorWhite));
                 textView.setEnabled(true);
 
             }

@@ -10,24 +10,24 @@ import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
-import com.zky.tea_time.mvp.contract.LoginContract;
+import com.zky.tea_time.mvp.contract.BookContract;
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 08/21/2019 18:10
+ * Created by MVPArmsTemplate on 08/30/2019 15:06
  */
 @ActivityScope
-public class LoginModel extends BaseModel implements LoginContract.Model {
+public class BookModel extends BaseModel implements BookContract.Model {
     @Inject
     Gson mGson;
     @Inject
     Application mApplication;
 
     @Inject
-    public LoginModel(IRepositoryManager repositoryManager) {
+    public BookModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
     }
 

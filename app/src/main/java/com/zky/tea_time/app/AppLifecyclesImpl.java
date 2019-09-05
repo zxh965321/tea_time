@@ -15,9 +15,6 @@ import timber.log.Timber;
  * 展示 {@link AppLifecycles} 的用法
  * <p>
  * Created by MVPArmsTemplate on 01/09/2019 14:35
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
- * ================================================
  */
 public class AppLifecyclesImpl implements AppLifecycles {
 

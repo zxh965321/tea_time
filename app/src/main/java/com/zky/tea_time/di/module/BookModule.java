@@ -6,19 +6,19 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 
-import com.zky.tea_time.mvp.contract.SplashContract;
-import com.zky.tea_time.mvp.model.SplashModel;
+import com.zky.tea_time.mvp.contract.BookContract;
+import com.zky.tea_time.mvp.model.BookModel;
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 08/21/2019 18:11
+ * Created by MVPArmsTemplate on 08/30/2019 15:06
  */
 @Module
-public abstract class SplashModule {
+public abstract class BookModule {
 
     @Binds
-    abstract SplashContract.Model bindSplashModel(SplashModel model);
+    abstract BookContract.Model bindBookModel(BookModel model);
 }

@@ -1,14 +1,8 @@
 package com.zky.tea_time.app;
 
-import android.content.Context;
-
-import com.jess.arms.utils.ArmsUtils;
-import com.zky.tea_time.app.utils.RxUtils;
 import com.zky.tea_time.utils.StringUtils;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;

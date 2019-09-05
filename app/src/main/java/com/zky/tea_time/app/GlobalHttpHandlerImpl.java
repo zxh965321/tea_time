@@ -13,9 +13,6 @@ import okhttp3.Response;
  * 展示 {@link GlobalHttpHandler} 的用法
  * <p>
  * Created by MVPArmsTemplate on 01/09/2019 14:35
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
- * ================================================
  */
 public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
     private Context context;

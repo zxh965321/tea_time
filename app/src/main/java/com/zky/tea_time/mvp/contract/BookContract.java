@@ -8,9 +8,9 @@ import com.jess.arms.mvp.IModel;
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 08/21/2019 17:38
+ * Created by MVPArmsTemplate on 08/30/2019 15:06
  */
-public interface MainContract {
+public interface BookContract {
     //对于经常使用的关于UI的方法可以定义到IView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
 

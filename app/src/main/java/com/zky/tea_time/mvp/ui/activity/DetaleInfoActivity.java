@@ -9,9 +9,9 @@ import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 
-import com.zky.tea_time.di.component.DaggerSplashComponent;
-import com.zky.tea_time.mvp.contract.SplashContract;
-import com.zky.tea_time.mvp.presenter.SplashPresenter;
+import com.zky.tea_time.di.component.DaggerDetaleInfoComponent;
+import com.zky.tea_time.mvp.contract.DetaleInfoContract;
+import com.zky.tea_time.mvp.presenter.DetaleInfoPresenter;
 
 import com.zky.tea_time.R;
 
@@ -23,13 +23,13 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 08/21/2019 18:11
+ * Created by MVPArmsTemplate on 09/05/2019 09:35
  */
-public class SplashActivity extends BaseActivity<SplashPresenter> implements SplashContract.View {
+public class DetaleInfoActivity extends BaseActivity<DetaleInfoPresenter> implements DetaleInfoContract.View {
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
-        DaggerSplashComponent //如找不到该类,请编译一下项目
+        DaggerDetaleInfoComponent //如找不到该类,请编译一下项目
                 .builder()
                 .appComponent(appComponent)
                 .view(this)
@@ -39,7 +39,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
-        return R.layout.activity_splash; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
+        return R.layout.activity_detale_info; //如果你不需要框架帮你设置 setContentView(id) 需要自行设置,请返回 0
     }
 
     @Override

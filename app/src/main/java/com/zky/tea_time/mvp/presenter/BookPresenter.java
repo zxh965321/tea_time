@@ -11,17 +11,17 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 
 import javax.inject.Inject;
 
-import com.zky.tea_time.mvp.contract.LoginContract;
+import com.zky.tea_time.mvp.contract.BookContract;
 
 
 /**
  * ================================================
  * Description:
  * <p>
- * Created by MVPArmsTemplate on 08/21/2019 18:10
+ * Created by MVPArmsTemplate on 08/30/2019 15:06
  */
 @ActivityScope
-public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginContract.View> {
+public class BookPresenter extends BasePresenter<BookContract.Model, BookContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
     @Inject
@@ -32,7 +32,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
     AppManager mAppManager;
 
     @Inject
-    public LoginPresenter(LoginContract.Model model, LoginContract.View rootView) {
+    public BookPresenter(BookContract.Model model, BookContract.View rootView) {
         super(model, rootView);
     }
 
